@@ -4,8 +4,10 @@ import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.quartz.Job
 import org.quartz.JobExecutionContext
+import org.slf4j.LoggerFactory
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +18,7 @@ class MyJob : Job {
         }.forEach {
             registerAtLesson(it)
             val secondForSleap = random.nextInt(30)
-            Thread.sleep(secondForSleap*1000L)
+            Thread.sleep(secondForSleap * 1000L)
         }
     }
 
@@ -38,28 +40,30 @@ class MyJob : Job {
                     .add("entry.163619523", student.getString("phone"))
                     .add("entry.1361591872", formatter.format(Date()))
                     .build()
-//        val response = client.newCall(
-//                Request.Builder()
-//                        .url(url)
-//                        .post(formBody)
-//                        .build()
-//        ).execute()
+//            val response = client.newCall(
+//                    Request.Builder()
+//                            .url(url)
+//                            .post(formBody)
+//                            .build()
+//            ).execute()
 //
-//        if (response.isSuccessful) {
-//            response.body()?.bytes()?.let {
-//                val data = String(it)
-//                logger.debug(data)
-//                if (data.contains("Ответ записан")) {
-//                    logger.info("Student $lastName $firstName $patronymic from $group group is REGISTERED at $lessonTitle")
-//                } else {
-//                    logger.error("Student $lastName $firstName $patronymic from $group group is NOT REGISTERED at $lessonTitle")
+//            if (response.isSuccessful) {
+//                response.body()?.bytes()?.let {
+//                    val data = String(it)
+//                    logger.debug(data)
+//                    if (data.contains("Ответ записан")) {
+//                        logger.info("Student $lastName $firstName $patronymic from $group group is REGISTERED at $lessonTitle")
+//                    } else {
+//                        logger.error("Student $lastName $firstName $patronymic from $group group is NOT REGISTERED at $lessonTitle")
+//                    }
 //                }
+//            } else {
+//                logger.error("Error while processing request\n" + response.message())
 //            }
-//        } else {
-//            logger.error("Error while processing request\n" + response.message())
-//        }
         }
 
+        private val logger = LoggerFactory.getLogger(MyJob::class.java)
+        private val url = "https://docs.google.com/forms/d/e/1FAIpQLScdwxIecqujMM3PHEHac9jy2p-32VXwo_vdW_VE30Fat-OT_A/formResponse"
         private val config = ConfigFactory.load()
         private val students = config.getConfigList("students")
         private val random = Random()

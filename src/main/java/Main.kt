@@ -20,7 +20,6 @@ import org.quartz.impl.JobDetailImpl
 
 
 object Main {
-    private val url = "https://docs.google.com/forms/d/e/1FAIpQLScdwxIecqujMM3PHEHac9jy2p-32VXwo_vdW_VE30Fat-OT_A/formResponse"
     private val scheduler = StdSchedulerFactory().scheduler
     @JvmStatic
     fun main(args: Array<String>) {
