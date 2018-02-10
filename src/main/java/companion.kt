@@ -5,13 +5,7 @@ enum class Month(val num: Int) {
     MAY(5);
 
     companion object {
-        fun getByNum(num: Int): Month? {
-            for (i in Month.values()) {
-                if (i.num == num) {
-                    return i
-                }
-            }
-            return null
-        }
+        private val numToMonth = Month.values().associateBy { it.num }
+        fun getByNum(num: Int): Month? = numToMonth[num]
     }
 }
