@@ -40,26 +40,26 @@ class MyJob : Job {
                     .add("entry.163619523", student.getString("phone"))
                     .add("entry.1361591872", formatter.format(Date()))
                     .build()
-//            val response = client.newCall(
-//                    Request.Builder()
-//                            .url(url)
-//                            .post(formBody)
-//                            .build()
-//            ).execute()
-//
-//            if (response.isSuccessful) {
-//                response.body()?.bytes()?.let {
-//                    val data = String(it)
-//                    logger.debug(data)
-//                    if (data.contains("Ответ записан")) {
-//                        logger.info("Student $lastName $firstName $patronymic from $group group is REGISTERED at $lessonTitle")
-//                    } else {
-//                        logger.error("Student $lastName $firstName $patronymic from $group group is NOT REGISTERED at $lessonTitle")
-//                    }
-//                }
-//            } else {
-//                logger.error("Error while processing request\n" + response.message())
-//            }
+            val response = client.newCall(
+                    Request.Builder()
+                            .url(url)
+                            .post(formBody)
+                            .build()
+            ).execute()
+
+            if (response.isSuccessful) {
+                response.body()?.bytes()?.let {
+                    val data = String(it)
+                    logger.debug(data)
+                    if (data.contains("Ответ записан")) {
+                        logger.info("Student $lastName $firstName $patronymic from $group group is REGISTERED at $lessonTitle")
+                    } else {
+                        logger.error("Student $lastName $firstName $patronymic from $group group is NOT REGISTERED at $lessonTitle")
+                    }
+                }
+            } else {
+                logger.error("Error while processing request\n" + response.message())
+            }
         }
 
         private val logger = LoggerFactory.getLogger(MyJob::class.java)
