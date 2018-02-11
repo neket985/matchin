@@ -1,0 +1,13 @@
+<html>
+    <body>
+    {% for item in filesList %}
+        {{ fileLink(item) }}
+    {% endfor %}
+    </body>
+</html>
+
+{% macro fileLink(name) %}
+    <a href="/logs/{{ name }}">
+    {{ name }}
+    </a>
+{% endmacro %}
