@@ -43,7 +43,6 @@ object Main {
                     .serverConfig {
                         it
                                 .port(serverConf.getInt("port"))
-//                                .address(InetAddress.getByName(serverConf.getString("host")))
                                 .baseDir(baseDir)
                     }
                     .handlers { chain ->
