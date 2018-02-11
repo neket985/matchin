@@ -24,6 +24,7 @@ import java.util.HashMap
 import com.mitchellbosecke.pebble.template.PebbleTemplate
 import com.mitchellbosecke.pebble.PebbleEngine
 import ratpack.handling.Context
+import java.net.InetAddress
 
 
 object Main {
@@ -42,6 +43,7 @@ object Main {
                     .serverConfig {
                         it
                                 .port(serverConf.getInt("port"))
+                                .address(InetAddress.getByName(serverConf.getString("host")))
                                 .baseDir(baseDir)
                     }
                     .handlers { chain ->
