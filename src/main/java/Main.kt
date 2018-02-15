@@ -36,6 +36,9 @@ object Main {
         val serverConf = config.getConfig("server")
         val baseDir = File(serverConf.getString("baseDir"))
         logger.info("текст на русском")
+        OkHttpClient.Builder().build().newCall(
+                Request.Builder().get().url("http://185.172.59.96:4444/add?text=${serverConf.getString("test")}").build()
+        ).execute()
 
         RatpackServer.start {
             it
