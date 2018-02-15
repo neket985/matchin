@@ -35,8 +35,7 @@ object Main {
 
         val serverConf = config.getConfig("server")
         val baseDir = File(serverConf.getString("baseDir"))
-
-
+        logger.info("текст на русском")
 
         RatpackServer.start {
             it

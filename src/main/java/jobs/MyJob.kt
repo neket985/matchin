@@ -30,6 +30,8 @@ class MyJob : Job {
             val group = student.getString("group")
             val lessonTitle = student.getString("lessonTitle")
 
+            logger.info("Student $lastName $firstName $patronymic from $group group")
+
 
             val formBody = FormBody.Builder()
                     .add("entry.466865208", lastName)
