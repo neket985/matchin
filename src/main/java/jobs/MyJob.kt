@@ -40,6 +40,7 @@ class MyJob : Job {
                     .add("entry.2127907320", group)
                     .add("entry.1518597535", lessonTitle)
                     .add("entry.163619523", student.getString("phone"))
+                    .add("entry.1790079537", student.getString("mail") + " " + groupMail)
                     .add("entry.1361591872", formatter.format(Date()))
                     .build()
             val response = client.newCall(
@@ -71,5 +72,7 @@ class MyJob : Job {
         private val random = Random()
         private val formatter = SimpleDateFormat("yyyy-MM-dd")
         private val client = OkHttpClient.Builder().build()
+
+        private val groupMail = config.getString("groupMail")
     }
 }
